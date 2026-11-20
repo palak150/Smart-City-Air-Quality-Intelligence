@@ -1,68 +1,64 @@
-# Smart City – Air Quality Intelligence
 
-A small, ready-to-run project for exploring air-quality patterns across Delhi NCR.
-It keeps the original project's core idea—raw data → cleaned data → analytics → dashboard—
-while adding a lightweight local dashboard and a few distinct views.
+# 🌆 Smart City – Air Quality Intelligence
 
-## What's different in this version
-- Uses a reproducible demo dataset with date, time slot and monitoring-station fields.
-- Adds a city ranking and a selectable city/date dashboard filter.
-- Includes a local Streamlit dashboard so you can preview results in a browser without first
-  configuring Databricks.
-- Keeps SQL analytics examples for a Databricks-style workflow.
+An interactive data analytics project designed to analyze
+urban air quality and provide insights into pollution trends
+across different cities.
 
-## Important data note
-`data/raw/air_quality_demo.csv` contains **synthetic demonstration data**. It is not official
-CPCB, OpenAQ, or live sensor data. Do not present it as real-world measurements.
+## 📊 Dashboard Preview
 
-## Run on Windows (VS Code)
-1. Install Python 3.10 or newer.
-2. Open this project folder in VS Code.
-3. Open Terminal → New Terminal.
-4. Create a virtual environment:
-   ```powershell
-   python -m venv .venv
-   ```
-5. Activate it:
-   ```powershell
-   .\.venv\Scripts\Activate.ps1
-   ```
-   If PowerShell blocks activation, run this for the current terminal only:
-   ```powershell
-   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-   ```
-   Then activate again.
-6. Install packages:
-   ```powershell
+![Air Quality Dashboard](screenshots/dashboard.png)
+
+## 🎯 Project Objectives
+
+- Analyze air quality across multiple cities.
+- Track pollutant levels and trends.
+- Compare air quality between cities.
+- Identify pollution patterns through interactive visualizations.
+
+## 🛠️ Tech Stack
+
+- Python
+- Pandas
+- Streamlit
+- Plotly
+- SQL
+
+## ⚙️ Features
+
+- Interactive dashboard
+- City-wise comparison
+- Pollutant analysis
+- Date-based filtering
+- Data processing pipeline (Raw → Silver → Gold)
+
+## 🚀 How to Run
+
+1. Clone the repository.
+2. Install dependencies:
+
    pip install -r requirements.txt
-   ```
-7. Build the analytics outputs:
-   ```powershell
-   python src/local_pipeline.py
-   ```
-8. Launch the dashboard:
-   ```powershell
+
+3. Run the dashboard:
+
    streamlit run app.py
-   ```
-   Streamlit will show a local URL, usually `http://localhost:8501`. Open it in your browser.
 
-## Project structure
-- `data/raw/air_quality_demo.csv` – synthetic demo observations
-- `data/silver/` – cleaned observations created by the pipeline
-- `data/gold/` – aggregated analytics created by the pipeline
-- `src/local_pipeline.py` – cleaning and aggregation
-- `app.py` – interactive local dashboard
-- `sql/dashboard_queries.sql` – example SQL for Gold analytics
-- `docs/data_dictionary.md` – fields and limitations
+## 📁 Project Structure
 
-## Main dashboard views
-- KPI cards: average AQI, peak AQI, cities covered, observations
-- City ranking: average AQI by city
-- Daily AQI trend by city
-- Pollutant comparison
-- City-level detail table
+- app.py – Interactive dashboard
+- src/ – Data processing scripts
+- data/ – Dataset and processed outputs
+- sql/ – SQL queries
+- docs/ – Project documentation
+- screenshots/ – Dashboard preview
 
-## Databricks
-The SQL file provides starter queries. To use them in Databricks, upload the generated Gold
-CSV files or write equivalent Delta tables in your workspace, then adapt table names to your
-catalog and schema.
+## 📌 Dataset Disclaimer
+
+This project uses synthetic demonstration data.
+It does not represent official CPCB measurements
+or live sensor readings.
+
+## 👩‍💻 Author
+
+Palak Kohli
+GitHub: https://github.com/palak150
