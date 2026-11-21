@@ -94,10 +94,30 @@ hr {
 }
 </style>
 """, unsafe_allow_html=True)
-st.title("🌫️ Smart City – Air Quality Intelligence")
-st.caption("Delhi NCR • City comparison, pollutant patterns and AQI trends")
-st.warning("Demonstration dataset is synthetic; it is not official CPCB live measurement data.")
 
+st.markdown("""
+<div style="
+    background: linear-gradient(110deg, #163B50, #102638);
+    border: 1px solid #286078;
+    border-left: 5px solid #48D6C1;
+    border-radius: 18px;
+    padding: 25px 30px;
+    margin-bottom: 22px;
+">
+    <div style="color:#48D6C1; font-size:12px; font-weight:700;
+                letter-spacing:3px;">
+        SMART CITY ANALYTICS
+    </div>
+    <h1 style="color:#F0FFFF; margin:10px 0 5px 0;
+               font-size:34px;">
+        🌫️ Air Quality Intelligence
+    </h1>
+    <p style="color:#B5CCD8; margin:0; font-size:15px;">
+        Delhi NCR | City monitoring, pollutant analysis and AQI trends
+    </p>
+</div>
+""", unsafe_allow_html=True)
+st.warning("Demonstration dataset is synthetic; it is not official CPCB live measurement data.")
 if not SILVER.exists() or not (GOLD / "city_summary.csv").exists():
     st.info("Analytics files are not generated yet. Run `python src/local_pipeline.py` in the project terminal, then refresh this page.")
     st.stop()
