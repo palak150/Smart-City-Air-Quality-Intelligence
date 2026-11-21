@@ -9,42 +9,87 @@ SILVER = ROOT / "data" / "silver" / "air_quality_clean.csv"
 
 st.set_page_config(page_title="Smart City | Air Quality Intelligence", page_icon="🌫️", layout="wide")
 
+
 st.markdown("""
 <style>
+/* Main background */
 .stApp {
-    background: linear-gradient(135deg, #0B1725, #10283A);
-    color: #F1F5F9;
+    background: linear-gradient(135deg, #071421 0%, #10283A 55%, #0B1D2B 100%);
+    color: #EAF4F7;
 }
+
+/* Main content spacing */
 .block-container {
     padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
+    max-width: 1500px;
 }
-h1, h2, h3 {
-    color: #EAF7F7 !important;
+
+/* Headings */
+h1 {
+    color: #F0FFFF !important;
+    font-size: 2.5rem !important;
+    font-weight: 800 !important;
+}
+h2, h3 {
+    color: #65E5D2 !important;
     font-weight: 700 !important;
 }
+
+/* Caption and text */
+.stCaption, [data-testid="stCaptionContainer"] {
+    color: #A8C2D1 !important;
+}
+
+/* KPI cards */
 [data-testid="stMetric"] {
-    background: linear-gradient(145deg, #183449, #102638);
-    border: 1px solid #286078;
-    padding: 20px;
-    border-radius: 16px;
+    background: linear-gradient(145deg, #16364B, #102638);
+    border: 1px solid rgba(72, 214, 193, 0.35);
+    border-radius: 18px;
+    padding: 22px 20px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.22);
+}
+[data-testid="stMetricLabel"] {
+    color: #B5CCD8 !important;
 }
 [data-testid="stMetricValue"] {
     color: #48D6C1 !important;
-    font-weight: 700;
+    font-size: 2rem !important;
+    font-weight: 800 !important;
 }
+
+/* Sidebar */
 [data-testid="stSidebar"] {
-    background: #101F30;
+    background: #0C1D2C;
+    border-right: 1px solid #23465A;
 }
+[data-testid="stSidebar"] h2 {
+    color: #65E5D2 !important;
+}
+
+/* Buttons */
 .stButton > button {
-    background: #16B8A6;
+    background: linear-gradient(90deg, #16B8A6, #39D6C2);
     color: #071923;
     border: none;
     border-radius: 10px;
-    font-weight: 600;
+    font-weight: 700;
 }
+
+/* Data table */
 [data-testid="stDataFrame"] {
     border: 1px solid #286078;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* Dividers */
+hr {
+    border-color: #285064 !important;
+}
+
+/* Warning and info panels */
+[data-testid="stAlert"] {
     border-radius: 12px;
 }
 </style>
@@ -97,19 +142,45 @@ with left:
     st.subheader("City AQI ranking")
     fig = px.bar(city_avg, x="aqi", y="city", orientation="h", labels={"aqi":"Average AQI","city":"City"}, text_auto=".1f")
     fig.update_layout(yaxis_title="", xaxis_title="Average AQI")
-    st.plotly_chart(fig, use_container_width=True)
+    fig.update_layout(
+    template="plotly_dark",
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(16,40,58,0.65)",
+    font=dict(color="#EAF4F7", family="Arial"),
+    title_font=dict(color="#65E5D2", size=20),
+    margin=dict(l=15, r=15, t=35, b=15),
+    xaxis=dict(showgrid=True, gridcolor="#29485B"),
+    yaxis=dict(showgrid=False)
+)
+    st.plotly_chart(fig, use_container_width=True, theme=None)
 with right:
     st.subheader("Daily AQI trend")
     trend = filtered.groupby(["date", "city"], as_index=False)["aqi"].mean()
     fig = px.line(trend, x="date", y="aqi", color="city", markers=True, labels={"aqi":"Average AQI","date":"Date"})
     st.plotly_chart(fig, use_container_width=True)
-
+    fig.update_layout(
+    template="plotly_dark",
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(16,40,58,0.65)",
+    font=dict(color="#EAF4F7", family="Arial"),
+    margin=dict(l=15, r=15, t=35, b=15),
+    xaxis=dict(showgrid=True, gridcolor="#29485B"),
+    yaxis=dict(showgrid=True, gridcolor="#29485B")
+)
 st.subheader("Pollutant comparison")
 poll_cols = ["pm25", "pm10", "no2", "so2", "co"]
 poll = filtered[poll_cols].mean().rename_axis("pollutant").reset_index(name="average_value")
 fig = px.bar(poll, x="pollutant", y="average_value", color="pollutant", labels={"average_value":"Average concentration","pollutant":"Pollutant"})
-st.plotly_chart(fig, use_container_width=True)
-
+fig.update_layout(
+    template="plotly_dark",
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(16,40,58,0.65)",
+    font=dict(color="#EAF4F7", family="Arial"),
+    margin=dict(l=15, r=15, t=35, b=15),
+    xaxis=dict(showgrid=False),
+    yaxis=dict(showgrid=True, gridcolor="#29485B")
+)
+st.plotly_chart(fig, use_container_width=True, theme=None)
 st.subheader("City-level details")
 detail = filtered.groupby("city", as_index=False).agg(
     avg_aqi=("aqi","mean"), max_aqi=("aqi","max"), avg_pm25=("pm25","mean"),
