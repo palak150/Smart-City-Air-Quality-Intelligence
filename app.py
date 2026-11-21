@@ -9,6 +9,46 @@ SILVER = ROOT / "data" / "silver" / "air_quality_clean.csv"
 
 st.set_page_config(page_title="Smart City | Air Quality Intelligence", page_icon="🌫️", layout="wide")
 
+st.markdown("""
+<style>
+.stApp {
+    background: linear-gradient(135deg, #0B1725, #10283A);
+    color: #F1F5F9;
+}
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+h1, h2, h3 {
+    color: #EAF7F7 !important;
+    font-weight: 700 !important;
+}
+[data-testid="stMetric"] {
+    background: linear-gradient(145deg, #183449, #102638);
+    border: 1px solid #286078;
+    padding: 20px;
+    border-radius: 16px;
+}
+[data-testid="stMetricValue"] {
+    color: #48D6C1 !important;
+    font-weight: 700;
+}
+[data-testid="stSidebar"] {
+    background: #101F30;
+}
+.stButton > button {
+    background: #16B8A6;
+    color: #071923;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+}
+[data-testid="stDataFrame"] {
+    border: 1px solid #286078;
+    border-radius: 12px;
+}
+</style>
+""", unsafe_allow_html=True)
 st.title("🌫️ Smart City – Air Quality Intelligence")
 st.caption("Delhi NCR • City comparison, pollutant patterns and AQI trends")
 st.warning("Demonstration dataset is synthetic; it is not official CPCB live measurement data.")
