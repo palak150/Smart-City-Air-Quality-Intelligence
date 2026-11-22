@@ -6,8 +6,12 @@ urban air quality and provide insights into pollution trends
 across different cities.
 
 ## 📊 Dashboard Preview
+## 📊 Live Dashboard
 
-![Air Quality Dashboard](screenshots/dashboard.png)
+Explore the **Smart City Air Quality Intelligence** dashboard to view air-quality trends, compare pollutants, and analyse city-level pollution insights.
+
+🔗 **[View Live Dashboard](https://dbc-eb133604-284c.cloud.databricks.com/dashboardsv3/01f1e57a70fd1d5785d8ca1462e94820/published?o=7474643736567952)**
+
 
 ## 🎯 Project Objectives
 
